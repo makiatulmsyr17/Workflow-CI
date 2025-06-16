@@ -1,0 +1,14 @@
+artifact_uri: file:///home/runner/work/Workflow-CI/Workflow-CI/mlruns/0/2b356e11c3c041d4bdff71145f5f531a/artifacts
+end_time: 1750081310189
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: active
+run_id: 2b356e11c3c041d4bdff71145f5f531a
+run_name: upbeat-moose-387
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1750081265188
+status: 3
+tags: []
+user_id: runner
