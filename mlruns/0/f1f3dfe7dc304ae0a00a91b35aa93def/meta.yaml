@@ -1,0 +1,14 @@
+artifact_uri: file:///home/runner/work/Workflow-CI/Workflow-CI/mlruns/0/f1f3dfe7dc304ae0a00a91b35aa93def/artifacts
+end_time: 1750110039472
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: active
+run_id: f1f3dfe7dc304ae0a00a91b35aa93def
+run_name: intelligent-whale-75
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1750109995714
+status: 3
+tags: []
+user_id: runner
