@@ -1,11 +1,7 @@
-name: heart-disease-env
-channels:
-  - defaults
-  - conda-forge
-dependencies:
-  - python=3.10
-  - pip
-  - pip:
-    - mlflow
-    - pandas
-    - scikit-learn
+name: heart-disease-predictor
+
+conda_env: heart-disease-env.yml
+
+entry_points:
+  main:
+    command: "python modelling.py"
