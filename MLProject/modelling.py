@@ -1,4 +1,4 @@
-# modelling.py (Diperbarui untuk MLflow Project)
+# modelling.py (Diperbarui untuk menemukan path secara otomatis)
 
 import pandas as pd
 from sklearn.model_selection import train_test_split
@@ -7,14 +7,21 @@ from sklearn.preprocessing import StandardScaler
 import mlflow
 import mlflow.sklearn
 import warnings
+import os # Tambahkan import ini
 
 warnings.filterwarnings("ignore")
 
-# --- 1. Memuat & Persiapan Data ---
+# --- 1. Memuat Data dengan Path yang Robust ---
+# Dapatkan path direktori tempat skrip ini berada
+script_dir = os.path.dirname(__file__)
+# Gabungkan path tersebut dengan nama file data
+data_path = os.path.join(script_dir, 'Workflow-CI', 'MLProject', 'heart_preprocessing.csv')
+
 try:
-    df = pd.read_csv('Workflow-CI\MLProject\heart_preprocessing.csv')
+    df = pd.read_csv(data_path)
+    print(f"Dataset berhasil dimuat dari: {data_path}")
 except FileNotFoundError:
-    print("File 'heart_preprocess.csv' tidak ditemukan. Pastikan file ada di folder yang sama.")
+    print(f"File dataset tidak ditemukan di path: {data_path}")
     exit()
 
 X = df.drop('target', axis=1)
@@ -29,19 +36,14 @@ X_train_scaled = scaler.fit_transform(X_train)
 X_test_scaled = scaler.transform(X_test)
 
 # --- 2. Pelatihan Model dengan Autolog ---
-# Karena skrip ini dijalankan oleh 'mlflow run', sebuah run sudah aktif.
-# Kita hanya perlu mengaktifkan autologging.
 print("Mengaktifkan MLflow autolog...")
 mlflow.sklearn.autolog()
 
-# Definisikan dan latih model.
-# Autolog akan otomatis mencatat parameter, metrik, dan model ke dalam run yang sudah aktif.
 print("Melatih model RandomForestClassifier...")
 model = RandomForestClassifier(random_state=42)
 model.fit(X_train_scaled, y_train)
 
-# Evaluasi model untuk memicu pencatatan metrik oleh autolog
+# Evaluasi
 score = model.score(X_test_scaled, y_test)
-
 print(f"Pelatihan model selesai. Skor akurasi: {score:.4f}")
 print("Logging ke MLflow selesai.")
