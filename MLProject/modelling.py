@@ -12,7 +12,7 @@ warnings.filterwarnings("ignore")
 
 # --- 1. Memuat & Persiapan Data ---
 try:
-    df = pd.read_csv('heart_preprocess.csv')
+    df = pd.read_csv('Workflow-CI\MLProject\heart_preprocessing.csv')
 except FileNotFoundError:
     print("File 'heart_preprocess.csv' tidak ditemukan. Pastikan file ada di folder yang sama.")
     exit()
