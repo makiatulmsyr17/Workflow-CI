@@ -1,7 +1,0 @@
-name: heart-disease-predictor
-
-conda_env: heart-disease-env.yml
-
-entry_points:
-  main:
-    command: "python modelling.py"
