@@ -8,19 +8,34 @@ on:
 jobs:
   retrain-and-artifact:
     runs-on: ubuntu-latest
+    # Gunakan login shell agar conda dapat diinisialisasi dengan benar
+    defaults:
+      run:
+        shell: bash -l {0}
     steps:
+      # Langkah 1: Checkout kode dari repository
       - name: Checkout repository
         uses: actions/checkout@v3
-      - name: Set up Python
-        uses: actions/setup-python@v3
+
+      # Langkah 2: Setup environment Conda
+      - name: Set up Conda
+        uses: conda-incubator/setup-miniconda@v2
         with:
+          auto-update-conda: true
           python-version: '3.10'
-      - name: Install dependencies
-        run: pip install mlflow pandas scikit-learn
+
+      # Langkah 3: Install MLflow di environment dasar agar bisa menjalankan perintah 'mlflow'
+      - name: Install MLflow
+        run: pip install mlflow
+
+      # Langkah 4: Jalankan MLflow Project. 
+      # MLflow akan otomatis membuat environment dari conda.yaml dan menjalankan skrip
       - name: Run MLflow Project
         run: mlflow run ./MLProject
+
+      # Langkah 5: Simpan Artefak ke GitHub
       - name: Upload MLflow artifacts
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v3
         with:
           name: mlflow-artifacts
           path: mlruns/
