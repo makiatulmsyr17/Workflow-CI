@@ -13,7 +13,7 @@ print("--- Memulai skrip pembuatan model ---")
 # 1. Memuat Dataset
 # Pastikan file 'heart_preprocessing.csv' ada di dalam folder 'MLProject'
 try:
-    df = pd.read_csv("Workflow-CI\\MLProject\\heart_preprocessing.csv")
+    df = pd.read_csv("./heart_preprocessing.csv")
     print("Dataset berhasil dimuat.")
 except FileNotFoundError:
     print("ERROR: File 'heart_preprocessing.csv' tidak ditemukan di dalam folder 'MLProject'.")
